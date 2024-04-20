@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Article List</title>
-</head>
+@section('content')
+    <div class="container">
 
-<body>
-    <h1>Article List</h1>
 
-    {{-- For Laravel --}}
-    <ul>
+
         @foreach ($articles as $article)
-            {{-- <li>{{ $article['id'] }}</li> --}}
-            <li>{{ $article["title"] }}</li>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $article->title }}</h5>
+                    <div class="card-subtitle mb-2 text-muted small">
+                        {{ $article->created_at->diffForHumans() }}
+                    </div>
+                    <p class="card-text">{{ $article->body }}</p>
+                    <a class="card-link" href="{{ url("/articles/detail/$article->id") }}">
+                        View Detail &raquo;
+                    </a>
+                </div>
+            </div>
         @endforeach
-    </ul>
 
-</body>
+        {{ $articles->links() }}
+    </div>
+@endsection
 
-</html>
-
-{{-- For PHP --}}
-{{-- <ul>
-    <?php foreach($articles as $article): ?>
-    <li><?php echo $article['title']; ?></li>
-    <?php endforeach ?>
-</ul> --}}

@@ -14,7 +14,7 @@
     {{-- For Laravel --}}
     <ul>
         @foreach ($articles as $article)
-            <li>{{ $article['id'] }}</li>
+            {{-- <li>{{ $article['id'] }}</li> --}}
             <li>{{ $article["title"] }}</li>
         @endforeach
     </ul>

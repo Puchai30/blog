@@ -3,7 +3,11 @@
 @section('content')
     <div class="container">
 
-
+        @if (session('info'))
+            <div class="alert alert-info">
+                {{ session('info') }}
+            </div>
+        @endif
 
         @foreach ($articles as $article)
             <div class="card mb-2">
@@ -23,4 +27,3 @@
         {{ $articles->links() }}
     </div>
 @endsection
-

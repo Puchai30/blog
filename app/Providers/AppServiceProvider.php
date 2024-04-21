@@ -22,10 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Paginator::useBootstrap();
+        Paginator::useBootstrap();
 
         Gate::define('comment-delete', function ($user, $comment) {
             return $user->id == $comment->user_id;
+        });
+
+        Gate::define('article-delete', function ($user, $article) {
+            return $user->id == $article->user_id;
         });
     }
 }

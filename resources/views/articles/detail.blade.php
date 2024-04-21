@@ -2,26 +2,31 @@
 
 @section('content')
     <div class="container">
+
+        {{--Article--}}
         <div class="card mb-2">
             <div class="card-body">
-                <h5 class="card-title">{{ $articler->title }}</h5>
+                <h5 class="card-title">{{ $article->title }}</h5>
                 <div class="card-subtitle mb-2 text-muted small">
-                    {{ $articler->created_at->diffForHumans() }}
-                    Category: <b>{{ $articler->category->name }}</b>
+                    By <b>{{ $article->user->name }}</b>
+                    {{ $article->created_at->diffForHumans() }}
+                    Category: <b>{{ $article->category->name }}</b>
                 </div>
-                <p class="card-text">{{ $articler->body }}</p>
-                <a class="btn btn-warning" href="{{ url("/articles/delete/$articler->id") }}">
+
+                <p class="card-text">{{ $article->body }}</p>
+                <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
                     Delete
                 </a>
             </div>
         </div>
 
+        {{-- Comments --}}
         <ul class="list-group">
             <li class="list-group-item active">
-                <b>Comments ({{ count($articler->comments) }})</b>
+                <b>Comments ({{ count($article->comments) }})</b>
             </li>
 
-            @foreach ($articler->comments as $comment)
+            @foreach ($article->comments as $comment)
                 <li class="list-group-item">
                     <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end"></a>
                     {{ $comment->content }}
@@ -37,7 +42,7 @@
         @auth
         <form action="{{ url('/comments/add') }}" method="post">
             @csrf
-            <input type="hidden" name="article_id" value="{{ $articler->id }}">
+            <input type="hidden" name="article_id" value="{{ $article->id }}">
             <textarea name="content" class="form-control mb-2" placeholder="New Comment"></textarea>
             <input type="submit" value="Add Comment" class="btn btn-secondary">
         </form>

@@ -7,6 +7,12 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'detail']);
+    }
+
     public function index()
     {
         $data = Article::latest()->paginate(5);
@@ -41,7 +47,7 @@ class ArticleController extends Controller
             ["id" => 2, "name" => "Tech"],
         ];
 
-        return view('articles.add',['categories' => $data]);
+        return view('articles.add', ['categories' => $data]);
     }
 
     public function create()
@@ -63,7 +69,4 @@ class ArticleController extends Controller
 
         return redirect('/articles');
     }
-
 }
-
-

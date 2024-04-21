@@ -21,6 +21,19 @@ class ArticleController extends Controller
         return view('articles.detail', ['articler' => $data]);
     }
 
+    public function delete($id)
+    {
+        $article = Article::find($id);
+
+        if ($article) {
+            $article->delete();
+            return redirect('/articles');
+        } else {
+            return view('errors.article_not_found');
+        }
+    }
+
+
     public function add()
     {
         $data = [
@@ -50,6 +63,7 @@ class ArticleController extends Controller
 
         return redirect('/articles');
     }
+
 }
 
 

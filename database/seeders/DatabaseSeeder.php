@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         Article::factory()->count(20)->create();
         Category::factory()->count(5)->create();
+        Comment::factory()->count(40)->create();
     }
 }

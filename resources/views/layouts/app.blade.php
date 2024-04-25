@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+   @yield('title')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -40,6 +40,24 @@
                                 + Add Article
                             </a>
                             @endauth
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="{{ url('') }}">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="{{ url('') }}">
+                                About
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-success" href="{{ url('') }}">
+                                Contact
+                            </a>
                         </li>
 
                     </ul>

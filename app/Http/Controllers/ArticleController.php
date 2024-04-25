@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
@@ -37,18 +38,17 @@ class ArticleController extends Controller
             return redirect('/articles')->with('info', 'Article deleted');
         } else {
             return back()->with('error', 'Unauthorize');
-
         }
     }
 
     public function add()
     {
-        $data = [
+        $categories = [
             ["id" => 1, "name" => "News"],
             ["id" => 2, "name" => "Tech"],
         ];
 
-        return view('articles.add', ['categories' => $data]);
+        return view('articles.add', ['categories' => $categories]);
     }
 
     public function create()
@@ -70,5 +70,44 @@ class ArticleController extends Controller
         $article->save();
 
         return redirect('/articles');
+    }
+
+    public function edit($id)
+    {
+        $articler = Article::findOrFail($id);
+        $categories = [
+            ["id" => 1, "name" => "News"],
+            ["id" => 2, "name" => "Tech"],
+        ];
+
+        return view('articles.edit', compact('articler', 'categories'));
+    }
+
+    public function update($id)
+    {
+        $validator = validator(request()->all(), [
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $article = Article::findOrFail($id);
+
+        if (Gate::allows('article-update', $article)) {
+            $article->title = request()->title;
+            $article->body = request()->body;
+            $article->category_id = request()->category_id;
+            $article->user_id = auth()->user()->id;
+            $article->save();
+
+            return redirect('/articles')->with('info', 'Article updated');
+        } else {
+            return back()->with('error', 'Unauthorized');
+        }
+
     }
 }

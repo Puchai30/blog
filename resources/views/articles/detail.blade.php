@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+<title>Detail</title>
+@endsection
+
 @section('content')
     <div class="container">
 
@@ -10,12 +14,17 @@
                 <div class="card-subtitle mb-2 text-muted small">
                     By <b>{{ $article->user->name }}</b>
                     {{ $article->created_at->diffForHumans() }}
-                    Category: <b>{{ $article->category->name }}</b>
+                    Category: <b>{{ optional($article->category)->name }}</b>
                 </div>
 
                 <p class="card-text">{{ $article->body }}</p>
+
                 <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
                     Delete
+                </a>
+
+                <a class="btn btn-info" href="{{ url("/articles/{$article->id}/edit") }}">
+                    Edit
                 </a>
             </div>
         </div>
@@ -39,6 +48,7 @@
             @endforeach
         </ul>
 
+        {{-- Add Comment --}}
         @auth
         <form action="{{ url('/comments/add') }}" method="post">
             @csrf

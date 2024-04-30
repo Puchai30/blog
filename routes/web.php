@@ -50,7 +50,9 @@ Route::get('/articles/more', function () {
 
 Route::get('/', [ArticleController::class, 'index']);
 
-Route::get('/articles', [ArticleController::class, 'index']);
+//   Route::get('/articles', [ArticleController::class, 'index']);
+
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 
 Route::get('/articles/detail/{id}', [ArticleController::class, 'detail']);
 

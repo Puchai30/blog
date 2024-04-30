@@ -14,6 +14,15 @@
             </div>
         @endif
 
+         {{-- Search Bar --}}
+         <form action="{{ route('articles.index') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search articles..." name="search" value="{{ request('search') }}">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </form>
+
+        {{-- Display Articles --}}
         @foreach ($articles as $article)
             <div class="card mb-2">
                 <div class="card-body">
@@ -29,6 +38,7 @@
             </div>
         @endforeach
 
+        {{-- Pagination --}}
         {{ $articles->links() }}
     </div>
 @endsection

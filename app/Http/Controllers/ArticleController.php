@@ -16,11 +16,15 @@ class ArticleController extends Controller
         $this->middleware('auth')->except(['index', 'detail']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // $users = DB::table('users')->get();
-        // dd($users);
-        $data = Article::latest()->paginate(5);
+        $query = $request->input('search');
+        $data = Article::query()
+            ->where('title', 'like', "%$query%")
+            ->orWhere('body', 'like', "%$query%")
+            ->latest()
+            ->paginate(5);
+
 
         return view('articles.index', ['articles' => $data]);
     }
@@ -49,6 +53,9 @@ class ArticleController extends Controller
         $categories = [
             ["id" => 1, "name" => "News"],
             ["id" => 2, "name" => "Tech"],
+            ["id" => 3, "name" => "Game"],
+            ["id" => 4, "name" => "Service"],
+            ["id" => 5, "name" => "Beauty"],
         ];
 
         return view('articles.add', ['categories' => $categories]);
@@ -81,6 +88,9 @@ class ArticleController extends Controller
         $categories = [
             ["id" => 1, "name" => "Tech"],
             ["id" => 2, "name" => "News"],
+            ["id" => 3, "name" => "Game"],
+            ["id" => 4, "name" => "Service"],
+            ["id" => 5, "name" => "Beauty"],
         ];
 
         return view('articles.edit', compact('articler', 'categories'));
@@ -111,6 +121,5 @@ class ArticleController extends Controller
         } else {
             return back()->with('error', 'Unauthorized');
         }
-
     }
 }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-   @yield('title')
+    @yield('title')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -31,39 +31,31 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             @auth
-                            <a class="nav-link text-success" href="{{ url('/articles/add') }}">
-                                + Add Article
-                            </a>
+                                <a class="nav-link text-success" href="{{ url('/articles/add') }}">
+                                    + Add Article
+                                </a>
                             @endauth
+
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('') }}">
-                                Home
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('') }}">
-                                About
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-success" href="{{ url('') }}">
-                                Contact
-                            </a>
-                        </li>
+                        </form>
 
                     </ul>
 
+
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
+
+
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

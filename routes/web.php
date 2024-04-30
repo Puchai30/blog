@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\CommentController;
 
@@ -73,3 +74,4 @@ Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('art
 
 Route::put('/articles/{id}/update', [ArticleController::class,'update'])->name('articles.update');
 
+Route::get('/categories/{category}', [CategoryController::class,'show'])->name('categories.show');

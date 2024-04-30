@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -17,6 +18,8 @@ class ArticleController extends Controller
 
     public function index()
     {
+        // $users = DB::table('users')->get();
+        // dd($users);
         $data = Article::latest()->paginate(5);
 
         return view('articles.index', ['articles' => $data]);
@@ -76,8 +79,8 @@ class ArticleController extends Controller
     {
         $articler = Article::findOrFail($id);
         $categories = [
-            ["id" => 1, "name" => "News"],
-            ["id" => 2, "name" => "Tech"],
+            ["id" => 1, "name" => "Tech"],
+            ["id" => 2, "name" => "News"],
         ];
 
         return view('articles.edit', compact('articler', 'categories'));

@@ -4,6 +4,7 @@
 <title>Detail</title>
 @endsection
 
+
 @section('content')
     <div class="container">
 
@@ -14,7 +15,8 @@
                 <div class="card-subtitle mb-2 text-muted small">
                     By <b>{{ $article->user->name }}</b>
                     {{ $article->created_at->diffForHumans() }}
-                    Category: <b>{{ optional($article->category)->name }}</b>
+                    Category: <a href="{{ url("/categories/{$article->category->id}") }}" >{{ optional($article->category)->name }}</a>
+
                 </div>
 
                 <p class="card-text">{{ $article->body }}</p>
@@ -60,3 +62,4 @@
 
     </div>
 @endsection
+<?php>

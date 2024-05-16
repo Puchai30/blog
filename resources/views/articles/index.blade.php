@@ -4,7 +4,6 @@
 <title>All Blog</title>
 @endsection
 
-
 @section('content')
     <div class="container">
 
@@ -15,7 +14,7 @@
         @endif
 
          {{-- Search Bar --}}
-         <form action="{{ route('articles.index') }}" method="GET" class="mb-3">
+        <form action="{{ route('articles.index') }}" method="GET" class="mb-3">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search articles..." name="search" value="{{ request('search') }}">
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
